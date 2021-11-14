@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using TripLog.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TripLogDaAL.Entities;
 
-namespace TripLog.DBContext
+namespace TripLogDaAL.DBContext
 {
-    public class TripDbContext : DbContext
+    public sealed class TripDbContext : DbContext
     {
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Destination> Destinations { get; set; }
@@ -20,6 +16,23 @@ namespace TripLog.DBContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Trip>()
+                .HasOne<Destination>(e => e.Destination)
+                .WithMany(d => d.Trips)
+                .HasForeignKey(e => e.DestinationId)
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Trip>()
+                .HasOne<Accommodation>(e => e.Accommodation)
+                .WithMany(d => d.Trips)
+                .HasForeignKey(e => e.AccommodationId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
+
+
             modelBuilder.Entity<TripActivity>()
                 .HasKey(bc => new { bc.TripId, bc.ActivityId });
             modelBuilder.Entity<TripActivity>()
@@ -38,7 +51,7 @@ namespace TripLog.DBContext
         public TripDbContext(DbContextOptions<TripDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            
         }
     }
 }

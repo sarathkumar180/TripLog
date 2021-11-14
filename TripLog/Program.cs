@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using TripLog.DBContext;
+using TripLogDaAL.DBContext;
 
 namespace TripLog
 {
@@ -17,19 +17,20 @@ namespace TripLog
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            using (var scope = host.Services.CreateScope())
-            {
-                try
-                {
-                    var context = scope.ServiceProvider.GetService<TripDbContext>();
-                    context.Database.EnsureDeleted();
-                    context.Database.Migrate();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    try
+            //    {
+            //        var context = scope.ServiceProvider.GetService<TripDbContext>();
+            //        context.Database.EnsureDeleted();
+            //        context.Database.Migrate();
+
+            //    }
+            //    catch (Exception)
+            //    {
+            //        throw;
+            //    }
+            //}
 
             host.Run();
         }

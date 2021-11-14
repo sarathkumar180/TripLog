@@ -15,6 +15,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DBContext\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TripLogDaAL\TripLogDaAL.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

@@ -1,24 +1,23 @@
-﻿@model TripViewModel
+﻿@using TripLogDaAL.Entities
+@model TripViewModel
 
 @{
     ViewBag.Title = "Add OldTrip - Page 3";
-    ViewBag.SubHeader = $"Add Things To Do in {Model.OldTrip.Destination}";
+    ViewBag.SubHeader = $"Add Things To Do in {Model.trip.DestinationId}";
 }
 
 <form asp-action="Add">
     <input type="hidden" asp-for="PageNumber" />
+    <input type="hidden" asp-for="trip.DestinationId" />
+    <input type="hidden" asp-for="trip.AccommodationId" />
+    <input type="hidden" asp-for="trip.StartDate" />
+    <input type="hidden" asp-for="trip.EndDate" />
+    <input type="hidden" asp-for="SelectedDestinationName" />
 
     <div class="form-group">
-        <input asp-for="OldTrip.ThingToDo1" class="form-control" />
+        @Html.ListBoxFor(x => x.trip.SelectedActivities, new SelectList(Model.Activities, "ActivityId", "ActivityName"), new { @class = "form-control" });
     </div>
 
-    <div class="form-group">
-        <input asp-for="OldTrip.ThingToDo2" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <input asp-for="OldTrip.ThingToDo3" class="form-control" />
-    </div>
 
     <div>
         <button type="submit" class="btn btn-dark">Save</button>

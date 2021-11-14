@@ -1,10 +1,11 @@
-﻿@model IEnumerable<OldTrip>
+﻿@using TripLogDaAL.Entities
+@model IEnumerable<TripLogDaAL.Entities.Trip>
 
 @{
-    ViewBag.Title = "My OldTrip Log";
+    ViewBag.Title = "My Trip Log";
 }
 
-<a asp-action="Add" asp-controller="Trip" class="mt-2"><b>Add OldTrip</b></a>
+<a asp-action="Add" asp-controller="Trip" class="mt-2"><b>Add Trip</b></a>
 @if (Model.Count() != 0)
 {
     <table class="table table-bordered table-striped">
@@ -15,42 +16,46 @@
                 <th>End Date</th>
                 <th>Accommodations</th>
                 <th>Things To Do</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (OldTrip trip in Model)
+            @foreach (Trip trip in Model)
             {
                 <tr>
-                    <td>@trip.Destination</td>
-                    <td>@trip.StartDate?.ToShortDateString()</td>
-                    <td>@trip.EndDate?.ToShortDateString()</td>
+                    <td>@trip.Destination.DestinationName</td>
+                    <td>@trip.StartDate.ToShortDateString()</td>
+                    <td>@trip.EndDate.ToShortDateString()</td>
                     <td>
-                        @if (!string.IsNullOrEmpty(trip.Accommodation))
+                        @if (trip.Accommodation != null)
                         {
-                            <div>@trip.Accommodation</div>
-                            @if (!string.IsNullOrEmpty(trip.AccommodationPhone))
+                            <div>@trip.Accommodation.AccommodationName</div>
+                            @if (!string.IsNullOrEmpty(trip.Accommodation.AccommodationPhone))
                             {
-                                <div>Phone: @trip.AccommodationPhone</div>
+                                <div>Phone: @trip.Accommodation.AccommodationPhone</div>
                             }
-                            @if (!string.IsNullOrEmpty(trip.AccommodationEmail))
+                            @if (!string.IsNullOrEmpty(trip.Accommodation.AccommodationEmail))
                             {
-                                <div>Email: @trip.AccommodationEmail</div>
+                                <div>Email: @trip.Accommodation.AccommodationEmail</div>
                             }
                         }
                     </td>
                     <td>
-                        @if (!string.IsNullOrEmpty(trip.ThingToDo1))
+                       
+                        @if (trip.TripActivities != null)
                         {
-                            <div>@trip.ThingToDo1</div>
+                            @foreach (TripActivity ta in trip.TripActivities)
+                            {
+                                @if (ta.Activity != null)
+                                {
+                                    <div>@ta.Activity.ActivityName</div>
+                                }
+                            }
                         }
-                        @if (!string.IsNullOrEmpty(trip.ThingToDo2))
-                        {
-                            <div>@trip.ThingToDo2</div>
-                        }
-                        @if (!string.IsNullOrEmpty(trip.ThingToDo3))
-                        {
-                            <div>@trip.ThingToDo3</div>
-                        }
+                        
+                    </td>
+                    <td>
+                        <div>delete</div>
                     </td>
                 </tr>
             }

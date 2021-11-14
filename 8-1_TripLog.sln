@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripLog", "TripLog\TripLog.csproj", "{57A17A13-2F8C-4766-8B28-33B580972BFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripLog", "TripLog\TripLog.csproj", "{57A17A13-2F8C-4766-8B28-33B580972BFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripLogDaAL", "TripLogDaAL\TripLogDaAL.csproj", "{3316092F-E918-4E96-AB66-1F05D2A03E11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{57A17A13-2F8C-4766-8B28-33B580972BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A17A13-2F8C-4766-8B28-33B580972BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A17A13-2F8C-4766-8B28-33B580972BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3316092F-E918-4E96-AB66-1F05D2A03E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3316092F-E918-4E96-AB66-1F05D2A03E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3316092F-E918-4E96-AB66-1F05D2A03E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3316092F-E918-4E96-AB66-1F05D2A03E11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
