@@ -1,0 +1,81 @@
+﻿@model AccommodationViewModel
+
+@{
+    ViewBag.Title = "Manage Accommodations";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form>
+
+    <fieldset>
+        <legend>Add Accommodation</legend>
+
+        <div class="divGroup">
+            <div class="form-group">
+                <label asp-for="NewAccommodationName">Enter Accommodation Name</label>
+                <input type="text" asp-for="NewAccommodationName" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NewAccommodationPhone">Enter Accommodation Phone</label>
+                <input type="text" asp-for="NewAccommodationPhone" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NewAccommodationEmail">Enter Accommodation Email</label>
+                <input type="text" asp-for="NewAccommodationEmail" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <button asp-action="AddAccommodation" asp-controller="Accommodation" type="submit" class="btn btn-outline-dark">Add</button>
+            </div>
+        </div>
+    </fieldset>
+    <br />
+
+
+    <fieldset>
+        <legend>Delete Accommodation</legend>
+
+        <div class="divGroup">
+
+            <div class="form-group">
+                <label asp-for="Accommodations">Select Accommodation Name</label>
+                @if (Model.Accommodations != null && Model.Accommodations.Any())
+                {
+                    @Html.DropDownListFor(model => model.SelectedAccommodationId, new SelectList(Model.Accommodations, "AccommodationId", "AccommodationName"), new { @id = "ddlAccommodation", @class = "form-control" })
+                    @Html.HiddenFor(model => model.SelectedAccommodationName, new { @id = "hdnAccommodationName" })
+                }
+                else
+                {
+                    @Html.DropDownList("Accommodation", Enumerable.Empty<SelectListItem>(), new { @disabled = "disabled", @class = "form-control" })
+                }
+
+            </div>
+
+            <div class="form-group">
+            @if (Model.Accommodations != null && Model.Accommodations.Any())
+            {
+                <button asp-action="DeleteAccommodation" asp-controller="Accommodation" class="btn btn-outline-dark" type="submit">Delete</button>
+            }
+            else
+            {
+                <button class="btn btn-outline-dark" disabled="disabled">Delete</button>
+            }
+                <button asp-action="Add" asp-controller="Trip" class="btn btn-outline-dark">Back</button>
+            </div>
+
+        </div>
+    </fieldset>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("body").on("change",
+            "#ddlAccommodation",
+            function () {
+                $("#hdnAccommodationName").val($(this).find("option:selected").text());
+            });
+    </script>
+
+</form>

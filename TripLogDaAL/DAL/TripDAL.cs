@@ -63,11 +63,7 @@ namespace TripLogDaAL.DAL
                                 _context.SaveChanges();
                             }
                         }
-                        else
-                        {
-                            transaction.Rollback();
-                            return false;
-                        }
+                        
                         transaction.Commit();
                         return true;
                     }
@@ -86,62 +82,132 @@ namespace TripLogDaAL.DAL
             _context.SaveChanges();
         }
 
-        public void AddDestination(Destination destEntity)
+        public bool AddDestination(Destination destEntity)
         {
-            _context.Destinations.Add(destEntity); 
-            _context.SaveChanges();
-        }
-
-        public void AddAccommodation(Accommodation accommodationEntity)
-        {
-            _context.Accommodations.Add(accommodationEntity);
-            _context.SaveChanges();
-        }
-
-        public void AddActvity(Activity activityEntity)
-        {
-            _context.Activities.Add(activityEntity);
-            _context.SaveChanges();
-        }
-
-        public void DeleteDestination(int id)
-        {
-            var destEntity = _context.Destinations.FirstOrDefault(x => x.DestinationId == id);
-            if (destEntity != null)
+            try
             {
-                _context.Destinations.Remove(destEntity);
+                _context.Destinations.Add(destEntity);
                 _context.SaveChanges();
+                return true;
             }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
 
-        public void DeleteAccommodation(int id)
+        public bool AddAccommodation(Accommodation accommodationEntity)
         {
-            var accommodationEntity = _context.Accommodations.FirstOrDefault(x => x.AccommodationId == id);
-            if (accommodationEntity != null)
+            try
             {
-                _context.Accommodations.Remove(accommodationEntity);
+                _context.Accommodations.Add(accommodationEntity);
                 _context.SaveChanges();
+                return true;
             }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
 
-        public void DeleteActivity(int id)
+        public bool AddActvity(Activity activityEntity)
         {
-            var activityEntity = _context.Activities.FirstOrDefault(x => x.ActivityId == id);
-            if (activityEntity != null)
+            try
             {
-                _context.Activities.Remove(activityEntity);
+                _context.Activities.Add(activityEntity);
                 _context.SaveChanges();
+                return true;
             }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
         }
 
-        public void DeleteTrip(int id)
+        public bool DeleteDestination(int id)
         {
-            var tripEntity = _context.Trips.FirstOrDefault(x => x.TripId == id);
-            if (tripEntity != null)
+            try
             {
-                _context.Trips.Remove(tripEntity);
-                _context.SaveChanges();
+                var destEntity = _context.Destinations.FirstOrDefault(x => x.DestinationId == id);
+                if (destEntity != null)
+                {
+                    _context.Destinations.Remove(destEntity);
+                    _context.SaveChanges();
+                    return true;
+                }
+
+                return false;
             }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public bool DeleteAccommodation(int id)
+        {
+            try
+            {
+                var accommodationEntity = _context.Accommodations.FirstOrDefault(x => x.AccommodationId == id);
+                if (accommodationEntity != null)
+                {
+                    _context.Accommodations.Remove(accommodationEntity);
+                    _context.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public bool DeleteActivity(int id)
+        {
+            try
+            {
+                var activityEntity = _context.Activities.FirstOrDefault(x => x.ActivityId == id);
+                if (activityEntity != null)
+                {
+                    _context.Activities.Remove(activityEntity);
+                    _context.SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
+        }
+
+        public bool DeleteTrip(int id)
+        {
+            try
+            {
+                var tripEntity = _context.Trips.FirstOrDefault(x => x.TripId == id);
+                if (tripEntity != null)
+                {
+                    _context.Trips.Remove(tripEntity);
+                    _context.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
 
     }

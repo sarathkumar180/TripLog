@@ -25,7 +25,8 @@ namespace TripLog
         // Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            ;
 
             services.AddDbContext<TripDbContext>(o =>
             {

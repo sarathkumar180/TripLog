@@ -2,7 +2,7 @@
 @model TripViewModel
 
 @{
-    ViewBag.Title = "Add OldTrip - Page 3";
+    ViewBag.Title = "Add Activities";
     ViewBag.SubHeader = $"Add Things To Do in {Model.trip.DestinationId}";
 }
 
@@ -13,7 +13,10 @@
     <input type="hidden" asp-for="trip.StartDate" />
     <input type="hidden" asp-for="trip.EndDate" />
     <input type="hidden" asp-for="SelectedDestinationName" />
-
+    
+    <div class="form-control">
+        <a asp-action="Index" asp-controller="Activity">Manage Activities</a>
+    </div>
     <div class="form-group">
         @Html.ListBoxFor(x => x.trip.SelectedActivities, new SelectList(Model.Activities, "ActivityId", "ActivityName"), new { @class = "form-control" });
     </div>

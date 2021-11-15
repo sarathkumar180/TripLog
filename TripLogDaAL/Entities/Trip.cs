@@ -13,13 +13,18 @@ namespace TripLogDaAL.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TripId { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Please enter the date your oldTrip starts.")]
         public DateTime StartDate { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Please enter the date your oldTrip ends.")]
         public DateTime EndDate { get; set; }
 
         [ForeignKey("DestinationId")]
+
         public Destination Destination { get; set; }
 
         public int DestinationId { get; set; }

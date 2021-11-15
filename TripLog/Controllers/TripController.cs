@@ -83,7 +83,8 @@ namespace TripLog.Controllers
                 }
                 else
                 {
-                    return View("Add1", vm);
+                    TempData["message"] = "Enter Valid inputs";
+                    return RedirectToAction("Add");
                 }
             }
             else if (vm.PageNumber == 3)

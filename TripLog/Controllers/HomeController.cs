@@ -14,11 +14,23 @@ namespace TripLog.Controllers
         {
             _context = context;
         }
-        public ViewResult Index()
+        public IActionResult Index()
         {
             TripDAL dal = new TripDAL(_context);
             var trips = dal.GetAllTrips();
             return View(trips);
+        }
+
+        public IActionResult Delete(int TripId)
+        {
+            TripDAL dal = new TripDAL(_context);
+            bool success = dal.DeleteTrip(TripId);
+            if (success)
+                TempData["message"] = "Trip deleted successfully";
+            else
+                TempData["message"] = "DB Error : Failed to delete trip. Please try agian";
+
+            return RedirectToAction("Index");
         }
 
     }
